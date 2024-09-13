@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h1>To-Do List</h1>
+
+  <!-- Ô nhập liệu và nút bấm để thêm công việc -->
+  <input type="text" id="toDoInput" placeholder="Thêm công việc...">
+  <button id="addButton">Thêm</button>
+
+  <!-- Danh sách các công việc -->
+  <ul id="toDoList"></ul>
+
+  <script>
+    // Lấy các phần tử HTML
+    const toDoInput = document.getElementById('toDoInput');
+    const addButton = document.getElementById('addButton');
+    const toDoList = document.getElementById('toDoList');
+
+    // Thêm sự kiện click vào nút "Thêm"
+    addButton.addEventListener('click', function() {
+      const task = toDoInput.value;
+
+      // Kiểm tra nếu ô nhập liệu không rỗng
+      if (task.trim()) {
+        // Tạo phần tử <li> mới cho công việc
+        const li = document.createElement('li');
+        li.textContent = task;
+
+        // Tạo nút "Xóa" cho từng công việc
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Xóa';
+        deleteButton.classList.add('deleteButton');
+        deleteButton.addEventListener('click', function() {
+          li.remove();
+        });
+
+        // Thêm sự kiện click để đánh dấu công việc hoàn thành
+        li.addEventListener('click', function() {
+          li.classList.toggle('completed');
+        });
+
+        // Thêm nút "Xóa" vào <li> và sau đó thêm <li> vào danh sách
+        li.appendChild(deleteButton);
+        toDoList.appendChild(li);
+
+        // Xóa nội dung trong ô nhập liệu sau khi thêm công việc
+        toDoInput.value = '';
+      } else {
+        alert('Vui lòng nhập công việc!');
+      }
+    });
+
+    // Cho phép nhấn Enter để thêm công việc
+    toDoInput.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        addButton.click();
+      }
+    });
+  </script>
+</body>
+</html>

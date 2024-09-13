@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Tích hợp jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>  
+</head>
+<body>
+    <!-- Form thêm bài viết mới -->
+    <form id="addPostForm">
+        <!-- Ô nhập tiêu đề bài viết -->
+        <input type="text" id="title" placeholder="Tiêu đề" required>
+        <br><br>
+        <!-- Ô nhập nội dung bài viết -->
+        <textarea id="body" placeholder="Nội dung" required></textarea>
+        <br><br>
+        <!-- Nút để gửi bài viết -->
+        <button id="btn" type="submit">Add Post</button>
+    </form>
+
+    <script>
+        // Bắt sự kiện click vào nút 'Add Post'
+        $('#btn').click(function(e) {
+            e.preventDefault(); // Ngăn hành động mặc định (submit form)
+
+            // Lấy giá trị từ các ô input
+            const title = $('#title').val();
+            const body = $('#body').val();
+
+            // Dữ liệu sẽ gửi đi dưới dạng JSON
+            const data = {
+                title: title,
+                body: body,
+                userId: 1 // Đặt userId tùy ý, theo yêu cầu của API
+            };
+
+            console.log(data); // In ra dữ liệu trước khi gửi đi (để kiểm tra)
+
+            // Gửi yêu cầu POST bằng jQuery AJAX
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts', // API để tạo bài viết mới
+                type: 'POST', // Phương thức HTTP POST
+                contentType: 'application/json; charset=UTF-8', // Thiết lập header
+                data: JSON.stringify(data), // Chuyển đổi đối tượng JavaScript thành chuỗi JSON
+                success: function(response) {
+                    // Nếu thành công, in ra phản hồi từ server
+                    console.log(response);
+                },
+                error: function() {
+                    // Nếu có lỗi, thông báo lỗi
+                    console.error('Có lỗi xảy ra khi thêm bài viết.');
+                }
+            });
+        });
+       
+        // document.getElementById('btn').addEventListener('click', function (e) {
+        //     e.preventDefault();
+        //     const title = document.getElementById('title').value;
+        //     const body = document.getElementById('body').value;
+
+        //     const data = {
+        //         title: title,
+        //         body: body,
+        //         userId: 1,
+        //     }
+
+        //     console.log(data)
+
+        //     fetch('https://jsonplaceholder.typicode.com/posts', {
+        //         method: 'POST',
+        //         body: JSON.stringify(data),
+        //         headers: {
+        //             'Content-type': 'application/json; charset=UTF-8',
+        //         },
+        //     })
+        //         .then((response) => response.json())
+        //         .then((json) => console.log(json));
+        // });
+  
+
+    </script>
+</body>
+</html>
+
+   

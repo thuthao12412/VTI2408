@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /* Phần định dạng CSS cho giao diện */
+
+    /* Lớp .background có chiều rộng và chiều cao 100% màn hình */
+    .background {
+        width: 100%;
+        height: 100vh; /* 100vh đảm bảo chiều cao khớp với toàn bộ màn hình */
+        
+        /* Sử dụng Flexbox để căn giữa nội dung (nút bấm) theo cả trục ngang và dọc */
+        display: flex;
+        justify-content: center; /* Canh giữa theo chiều ngang */
+        align-items: center;     /* Canh giữa theo chiều dọc */
+    }
+    </style>
+</head>
+<body>
+    <!-- Phần tử div với lớp .background bao bọc nút bấm -->
+    <div class="background">
+        <!-- Nút bấm gọi hàm JavaScript khi được nhấn -->
+        <button onclick="changebackgroudcolor()">Thay đổi</button>
+    </div>
+
+    <!-- Đoạn mã JavaScript thay đổi màu nền -->
+    <script>
+        /* Hàm thay đổi màu nền ngẫu nhiên */
+        function changebackgroudcolor() {
+            /* 
+            Math.random() tạo ra số ngẫu nhiên từ 0 đến 1, sau đó nhân với 16777215
+            là giá trị thập phân lớn nhất cho mã màu HEX (#FFFFFF). 
+            */
+            const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+            
+            /* 
+            Sử dụng document.body.style.backgroundColor để thay đổi màu nền của trang. 
+            Mã màu HEX được ghép bằng dấu "#" và giá trị randomColor đã được sinh ra. 
+            */
+            document.body.style.backgroundColor = "#" + randomColor;
+        }
+    </script> 
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Đoạn văn để hiển thị trên trang -->
+    <p id="doanvan">
+        Một, hai, ba... ánh nắng mặt trời bắt đầu chiếu rọi từ phía sau những gốc tre làng, làm bật lên bức tranh huyền diệu của quê hương. Dưới ánh sáng mới, cảnh đẹp thật tuyệt vời: những giọt sương trên lá cây lấp lánh như những viên ngọc, những đoá hoa ven đường rực rỡ, tươi tắn hơn bao giờ hết. Tiếng chim hót líu lo kết hợp với tiếng cười rộn ràng tạo nên không khí ấm áp và vui tươi. Làng quê yên bình, giản dị nhưng khiến trái tim em tràn ngập hạnh phúc.
+    </p>
+    <!-- Nút bấm để thay đổi nội dung đoạn văn -->
+    <button onclick="thaydoi()">Thay đổi</button>
+    <script>
+        // Hàm thaydoi để thay đổi nội dung đoạn văn
+        function thaydoi(){
+            // Thay đổi nội dung của phần tử với id "doanvan"
+            document.getElementById("doanvan").innerHTML =
+                "Chiều xuân! Một chiều xuân trên vùng đất yêu thương, Quảng Bình. Những bông đào, bông mai khoe sắc trên mọi con đường, ngõ phố. Tiếng cười rộn rã của trẻ con và tiếng hỏi thăm, chúc mừng tạo nên bức tranh phong cảnh rất phấn khích, tràn đầy sức sống. Trên những hàng cây xanh mướt, những chồi non nở bung, tạo nên hình ảnh của sự tươi mới. Chiều xuân. Những giọt mưa bụi bay bay nhẹ nhàng, rơi lên những cành đào mong manh, làm ướt mái tóc của cô gái xuân thì. Chiều xuân. Đẹp tuyệt vời. Yêu biết bao nhiêu mùa xuân trên quê hương mình.";
+        }
+    </script>
+</body>
+</html>

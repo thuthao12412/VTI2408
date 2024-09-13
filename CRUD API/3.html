@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập nhật bài viết</title>
+    <!-- Tích hợp jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    <h2>Cập nhật bài viết</h2>
+    <form id="updateForm">
+        <label for="postId">ID bài viết:</label>
+        <input type="number" id="postId" placeholder="Nhập ID bài viết" required>
+        <br><br>
+        <label for="title">Tiêu đề:</label>
+        <input type="text" id="title" placeholder="Nhập tiêu đề mới" required>
+        <br><br>
+        <label for="body">Nội dung:</label>
+        <textarea id="body" rows="4" placeholder="Nhập nội dung mới" required></textarea>
+        <br><br>
+        <button type="submit">Update Post</button>
+    </form>
+
+    <!-- Hiển thị thông báo kết quả -->
+    <p id="message"></p>
+
+    <script>
+        // Bắt sự kiện submit từ form
+        $('#updateForm').submit(function(e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của form (tải lại trang)
+
+            // Lấy giá trị từ form
+            const postId = $('#postId').val();
+            const title = $('#title').val();
+            const body = $('#body').val();
+
+            // Gửi yêu cầu PUT để cập nhật bài viết bằng $.ajax
+            $.ajax({
+                url: `https://jsonplaceholder.typicode.com/posts/${postId}`, // Đặt URL kèm ID bài viết
+                type: 'PUT', // Sử dụng phương thức PUT để cập nhật bài viết
+                contentType: 'application/json; charset=UTF-8', // Thiết lập header cho JSON
+                data: JSON.stringify({
+                    id: postId, // ID bài viết
+                    title: title, // Tiêu đề mới
+                    body: body, // Nội dung mới
+                    userId: 1 // Đặt userId tùy ý, theo yêu cầu của API
+                }),
+                success: function(data) {
+                    // Nếu thành công, hiển thị thông báo và in ra dữ liệu phản hồi
+                    $('#message').text('Cập nhật bài viết thành công!');
+                    console.log('Bài viết đã được cập nhật:', data);
+                },
+                error: function() {
+                    // Nếu có lỗi, hiển thị thông báo lỗi
+                    $('#message').text('Có lỗi xảy ra khi cập nhật bài viết!');
+                }
+            });
+        });
+    //     document.getElementById('updateForm').addEventListener('submit', function(e) {
+    // e.preventDefault();
+
+    // // Lấy giá trị từ form
+    // const postId = document.getElementById('postId').value;
+    // const title = document.getElementById('title').value;
+    // const body = document.getElementById('body').value;
+
+    // // Gửi yêu cầu PUT để cập nhật bài viết
+    // fetch(https://jsonplaceholder.typicode.com/posts/${postId}, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json; charset=UTF-8',
+    //     },
+    //     body: JSON.stringify({
+    //         id: postId,
+    //         title: title,
+    //         body: body,
+    //         userId: 1, // Đặt userId tùy ý, theo yêu cầu
+    //     }),
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     document.getElementById('message').innerText = 'Cập nhật bài viết thành công!';
+    //     console.log('Bài viết đã được cập nhật:', data);
+    // })
+    // .catch(error => {
+    //     document.getElementById('message').innerText = 'Có lỗi xảy ra khi cập nhật bài viết!';
+    //     console.error('Lỗi:', error);
+    // });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Tích hợp jQuery -->
+  <script src="//code.jquery.com/jquery.js"></script>
+</head>
+<body>
+  <!-- Nút để tải bài viết -->
+  <button id="loadPosts">Load Posts</button>
+  <!-- Danh sách để hiển thị các bài viết -->
+  <ul id="postList"></ul>
+
+  <script>
+    // Bắt sự kiện click vào nút Load Posts
+    $('#loadPosts').click(function() {
+      // Gửi yêu cầu GET bằng $.ajax
+      $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/posts', // API để lấy danh sách bài viết
+        type: 'GET', // Phương thức HTTP GET
+        success: function(posts) {
+          // Khi thành công, làm trống danh sách bài viết hiện có
+          $('#postList').empty();
+
+          // Duyệt qua từng bài viết và thêm vào danh sách
+          posts.forEach(function(post) {
+            const li = $('<li></li>').text(post.title); // Tạo một phần tử <li> cho mỗi bài viết
+            $('#postList').append(li); // Thêm <li> vào danh sách
+          });
+        },
+        error: function() {
+          // Nếu có lỗi, in thông báo lỗi ra console
+          console.error('Có lỗi xảy ra khi tải danh sách bài viết.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
